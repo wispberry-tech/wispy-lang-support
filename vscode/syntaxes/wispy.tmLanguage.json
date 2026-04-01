@@ -26,14 +26,14 @@
       "begin": "(\\{%-?)\\s*(raw)\\s*(-?%\\})",
       "end": "(\\{%-?)\\s*(endraw)\\s*(-?%\\})",
       "beginCaptures": {
-        "1": { "name": "punctuation.section.tag.begin.wispy" },
-        "2": { "name": "keyword.control.raw.wispy" },
-        "3": { "name": "punctuation.section.tag.end.wispy" }
+        "1": { "name": "punctuation.definition.tag.begin.wispy" },
+        "2": { "name": "entity.name.tag.wispy" },
+        "3": { "name": "punctuation.definition.tag.end.wispy" }
       },
       "endCaptures": {
-        "1": { "name": "punctuation.section.tag.begin.wispy" },
-        "2": { "name": "keyword.control.raw.wispy" },
-        "3": { "name": "punctuation.section.tag.end.wispy" }
+        "1": { "name": "punctuation.definition.tag.begin.wispy" },
+        "2": { "name": "entity.name.tag.wispy" },
+        "3": { "name": "punctuation.definition.tag.end.wispy" }
       },
       "contentName": "string.unquoted.raw.wispy"
     },
@@ -42,10 +42,10 @@
       "begin": "(\\{%-?)",
       "end": "(-?%\\})",
       "beginCaptures": {
-        "1": { "name": "punctuation.section.tag.begin.wispy" }
+        "1": { "name": "punctuation.definition.tag.begin.wispy" }
       },
       "endCaptures": {
-        "1": { "name": "punctuation.section.tag.end.wispy" }
+        "1": { "name": "punctuation.definition.tag.end.wispy" }
       },
       "patterns": [
         { "include": "#wispy-tag-keywords" },
@@ -57,10 +57,10 @@
       "begin": "(\\{\\{-?)",
       "end": "(-?\\}\\})",
       "beginCaptures": {
-        "1": { "name": "punctuation.section.embedded.begin.wispy" }
+        "1": { "name": "punctuation.definition.tag.begin.wispy" }
       },
       "endCaptures": {
-        "1": { "name": "punctuation.section.embedded.end.wispy" }
+        "1": { "name": "punctuation.definition.tag.end.wispy" }
       },
       "patterns": [
         { "include": "#wispy-expression" }
@@ -71,39 +71,39 @@
       "patterns": [
         {
           "match": "\\b(if|elif|else|endif|unless|endunless)\\b",
-          "name": "keyword.control.conditional.wispy"
+          "name": "entity.name.tag.wispy"
         },
         {
           "match": "\\b(for|in|empty|endfor)\\b",
-          "name": "keyword.control.loop.wispy"
+          "name": "entity.name.tag.wispy"
         },
         {
           "match": "\\b(set|with|endwith|capture|endcapture)\\b",
-          "name": "keyword.control.assignment.wispy"
+          "name": "entity.name.tag.wispy"
         },
         {
           "match": "\\b(macro|endmacro|call|endcall)\\b",
-          "name": "keyword.control.macro.wispy"
+          "name": "entity.name.tag.wispy"
         },
         {
           "match": "\\b(extends|block|endblock|include|render|import|as)\\b",
-          "name": "keyword.control.composition.wispy"
+          "name": "entity.name.tag.wispy"
         },
         {
           "match": "\\b(component|endcomponent|props|slot|endslot|fill|endfill)\\b",
-          "name": "keyword.control.component.wispy"
+          "name": "entity.name.tag.wispy"
         },
         {
           "match": "\\b(asset|endasset|meta|hoist|endhoist)\\b",
-          "name": "keyword.control.web.wispy"
+          "name": "entity.name.tag.wispy"
         },
         {
           "match": "\\b(raw|endraw)\\b",
-          "name": "keyword.control.raw.wispy"
+          "name": "entity.name.tag.wispy"
         },
         {
           "match": "\\b(isolated)\\b",
-          "name": "keyword.other.modifier.wispy"
+          "name": "entity.other.attribute-name.wispy"
         }
       ]
     },
@@ -217,7 +217,7 @@
 
     "wispy-assignment-operator": {
       "match": "(?<![=!<>])=(?!=)",
-      "name": "keyword.operator.assignment.wispy"
+      "name": "punctuation.separator.key-value.wispy"
     },
 
     "wispy-accessor": {
@@ -227,7 +227,7 @@
 
     "wispy-variable": {
       "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
-      "name": "variable.other.wispy"
+      "name": "entity.other.attribute-name.wispy"
     }
   }
 }
