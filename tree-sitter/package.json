@@ -1,0 +1,33 @@
+{
+  "name": "tree-sitter-wispy",
+  "version": "0.1.0",
+  "description": "Tree-sitter grammar for Wispy templates",
+  "license": "MIT",
+  "main": "bindings/node",
+  "keywords": [
+    "tree-sitter",
+    "parser",
+    "wispy",
+    "template"
+  ],
+  "dependencies": {
+    "nan": "^2.18.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.22.0"
+  },
+  "scripts": {
+    "build": "tree-sitter generate",
+    "test": "tree-sitter test"
+  },
+  "tree-sitter": [
+    {
+      "scope": "text.html.wispy",
+      "injection-regex": "wispy",
+      "file-types": [
+        "wsp"
+      ],
+      "highlights": "queries/highlights.scm"
+    }
+  ]
+}

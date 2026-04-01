@@ -1,0 +1,25 @@
+[extension]
+id = "wispy"
+name = "Wispy Templates"
+description = "Syntax highlighting for Wispy HTML templates"
+version = "0.1.0"
+schema_version = 1
+authors = ["Wispy Contributors"]
+repository = "https://github.com/wispy-lang/wispy-lang-support"
+
+[grammars.wispy]
+repository = "https://github.com/wispy-lang/tree-sitter-wispy"
+rev = "main"
+
+[language.wispy]
+scope = "source.wispy"
+file_types = ["wsp"]
+line_comments = []
+block_comment = ["{#", "#}"]
+brackets = [
+  { open = "{{", close = "}}", highlight = true },
+  { open = "{%", close = "%}", highlight = true },
+  { open = "{#", close = "#}", highlight = true },
+  { open = "(", close = ")", highlight = true },
+  { open = "[", close = "]", highlight = true },
+]

@@ -1,0 +1,39 @@
+{
+  "name": "wispy-templates",
+  "displayName": "Wispy Templates",
+  "description": "Syntax highlighting for Wispy HTML templates",
+  "version": "0.1.0",
+  "publisher": "wispy",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "wispy",
+        "aliases": [
+          "Wispy",
+          "Wispy Template"
+        ],
+        "extensions": [
+          ".wsp"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "wispy",
+        "scopeName": "text.html.wispy",
+        "path": "./syntaxes/wispy.tmLanguage.json",
+        "embeddedLanguages": {
+          "text.html.basic": "html"
+        }
+      }
+    ]
+  }
+}
