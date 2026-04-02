@@ -18,6 +18,7 @@
   "categories": [
     "Programming Languages"
   ],
+  "icon": "images/extension-icon-256.png",
   "contributes": {
     "languages": [
       {
@@ -29,6 +30,7 @@
         "extensions": [
           ".grov"
         ],
+        "icon": "images/icon.png",
         "configuration": "./language-configuration.json"
       }
     ],
