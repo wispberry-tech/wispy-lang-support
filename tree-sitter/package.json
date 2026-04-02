@@ -1,13 +1,14 @@
 {
-  "name": "tree-sitter-wispy",
+  "name": "tree-sitter-grov",
   "version": "0.1.0",
-  "description": "Tree-sitter grammar for Wispy templates",
+  "description": "Tree-sitter grammar for Wispy Grove templates",
   "license": "MIT",
   "main": "bindings/node",
   "keywords": [
     "tree-sitter",
     "parser",
-    "wispy",
+    "grov",
+    "wispy-grove",
     "template"
   ],
   "dependencies": {
@@ -22,10 +23,10 @@
   },
   "tree-sitter": [
     {
-      "scope": "text.html.wispy",
-      "injection-regex": "wispy",
+      "scope": "text.html.grov",
+      "injection-regex": "grov",
       "file-types": [
-        "wsp"
+        "grov"
       ],
       "highlights": "queries/highlights.scm"
     }

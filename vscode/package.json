@@ -1,13 +1,13 @@
 {
-  "name": "wispy-templates",
-  "displayName": "Wispy Templates",
-  "description": "Syntax highlighting for Wispy HTML templates",
+  "name": "wispy-grove",
+  "displayName": "Wispy Grove",
+  "description": "Syntax highlighting for Wispy Grove templates",
   "version": "0.1.0",
   "publisher": "wispy",
   "license": "SEE LICENSE IN ../LICENSE",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wispy-lang/wispy-lang-support"
+    "url": "https://github.com/wispy-lang/wispy-grove-support"
   },
   "engines": {
     "vscode": "^1.75.0"
@@ -21,22 +21,22 @@
   "contributes": {
     "languages": [
       {
-        "id": "wispy",
+        "id": "grov",
         "aliases": [
-          "Wispy",
-          "Wispy Template"
+          "Wispy Grove",
+          "Grove Template"
         ],
         "extensions": [
-          ".wsp"
+          ".grov"
         ],
         "configuration": "./language-configuration.json"
       }
     ],
     "grammars": [
       {
-        "language": "wispy",
-        "scopeName": "text.html.wispy",
-        "path": "./syntaxes/wispy.tmLanguage.json",
+        "language": "grov",
+        "scopeName": "text.html.grov",
+        "path": "./syntaxes/grove.tmLanguage.json",
         "embeddedLanguages": {
           "text.html.basic": "html"
         }

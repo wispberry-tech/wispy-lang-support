@@ -1,0 +1,233 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Wispy Grove Template",
+  "scopeName": "text.html.grov",
+  "patterns": [
+    { "include": "#grov-comment" },
+    { "include": "#grov-raw-block" },
+    { "include": "#grov-tag" },
+    { "include": "#grov-output" },
+    { "include": "text.html.basic" }
+  ],
+  "repository": {
+    "grov-comment": {
+      "name": "comment.block.grov",
+      "begin": "\\{#-?",
+      "end": "-?#\\}",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.comment.begin.grov" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.comment.end.grov" }
+      }
+    },
+
+    "grov-raw-block": {
+      "begin": "(\\{%-?)\\s*(raw)\\s*(-?%\\})",
+      "end": "(\\{%-?)\\s*(endraw)\\s*(-?%\\})",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.grov" },
+        "2": { "name": "entity.name.tag.grov" },
+        "3": { "name": "punctuation.definition.tag.end.grov" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.grov" },
+        "2": { "name": "entity.name.tag.grov" },
+        "3": { "name": "punctuation.definition.tag.end.grov" }
+      },
+      "contentName": "string.unquoted.raw.grov"
+    },
+
+    "grov-tag": {
+      "begin": "(\\{%-?)",
+      "end": "(-?%\\})",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.grov" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.end.grov" }
+      },
+      "patterns": [
+        { "include": "#grov-tag-keywords" },
+        { "include": "#grov-expression" }
+      ]
+    },
+
+    "grov-output": {
+      "begin": "(\\{\\{-?)",
+      "end": "(-?\\}\\})",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.grov" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.end.grov" }
+      },
+      "patterns": [
+        { "include": "#grov-expression" }
+      ]
+    },
+
+    "grov-tag-keywords": {
+      "patterns": [
+        {
+          "match": "\\b(if|elif|else|endif|unless|endunless)\\b",
+          "name": "entity.name.tag.grov"
+        },
+        {
+          "match": "\\b(for|in|empty|endfor)\\b",
+          "name": "entity.name.tag.grov"
+        },
+        {
+          "match": "\\b(set|with|endwith|capture|endcapture)\\b",
+          "name": "entity.name.tag.grov"
+        },
+        {
+          "match": "\\b(macro|endmacro|call|endcall)\\b",
+          "name": "entity.name.tag.grov"
+        },
+        {
+          "match": "\\b(extends|block|endblock|include|render|import|as)\\b",
+          "name": "entity.name.tag.grov"
+        },
+        {
+          "match": "\\b(component|endcomponent|props|slot|endslot|fill|endfill)\\b",
+          "name": "entity.name.tag.grov"
+        },
+        {
+          "match": "\\b(asset|endasset|meta|hoist|endhoist)\\b",
+          "name": "entity.name.tag.grov"
+        },
+        {
+          "match": "\\b(raw|endraw)\\b",
+          "name": "entity.name.tag.grov"
+        },
+        {
+          "match": "\\b(isolated)\\b",
+          "name": "entity.other.attribute-name.grov"
+        }
+      ]
+    },
+
+    "grov-expression": {
+      "patterns": [
+        { "include": "#grov-string-double" },
+        { "include": "#grov-string-single" },
+        { "include": "#grov-number" },
+        { "include": "#grov-boolean" },
+        { "include": "#grov-null" },
+        { "include": "#grov-logical-operator" },
+        { "include": "#grov-filter" },
+        { "include": "#grov-builtin-function" },
+        { "include": "#grov-comparison-operator" },
+        { "include": "#grov-concatenation-operator" },
+        { "include": "#grov-arithmetic-operator" },
+        { "include": "#grov-assignment-operator" },
+        { "include": "#grov-accessor" },
+        { "include": "#grov-variable" }
+      ]
+    },
+
+    "grov-string-double": {
+      "name": "string.quoted.double.grov",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "match": "\\\\.",
+          "name": "constant.character.escape.grov"
+        }
+      ]
+    },
+
+    "grov-string-single": {
+      "name": "string.quoted.single.grov",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "match": "\\\\.",
+          "name": "constant.character.escape.grov"
+        }
+      ]
+    },
+
+    "grov-number": {
+      "match": "\\b\\d+(\\.\\d+)?\\b",
+      "name": "constant.numeric.grov"
+    },
+
+    "grov-boolean": {
+      "match": "\\b(true|false)\\b",
+      "name": "constant.language.boolean.grov"
+    },
+
+    "grov-null": {
+      "match": "\\b(nil|null)\\b",
+      "name": "constant.language.null.grov"
+    },
+
+    "grov-logical-operator": {
+      "match": "\\b(and|or|not)\\b",
+      "name": "keyword.operator.logical.grov"
+    },
+
+    "grov-filter": {
+      "match": "\\|\\s*([a-zA-Z_][a-zA-Z0-9_]*)",
+      "captures": {
+        "0": {
+          "patterns": [
+            {
+              "match": "\\|",
+              "name": "keyword.operator.filter.grov"
+            },
+            {
+              "match": "\\b(upcase|downcase|capitalize|titlecase|trim|lstrip|rstrip|replace|replace_all|prepend|append|truncate|truncate_words|split|strip_html|strip_newlines|newline_to_br|nl2br|escape|h|url_encode|url_decode|base64_encode|base64_decode|slugify|markdown|safe|json|default|round|ceil|floor|abs|plus|minus|times|divided_by|modulo|join|first|last|size|length|reverse|sort|uniq|compact|flatten|map|where|reject|sum|min|max|slice|push|keys|values)\\b",
+              "name": "support.function.filter.grov"
+            },
+            {
+              "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+              "name": "support.function.filter.grov"
+            }
+          ]
+        }
+      }
+    },
+
+    "grov-builtin-function": {
+      "match": "\\b(range|caller|super)\\s*(?=\\()",
+      "captures": {
+        "1": { "name": "support.function.builtin.grov" }
+      }
+    },
+
+    "grov-comparison-operator": {
+      "match": "==|!=|<=|>=|<|>",
+      "name": "keyword.operator.comparison.grov"
+    },
+
+    "grov-concatenation-operator": {
+      "match": "~",
+      "name": "keyword.operator.concatenation.grov"
+    },
+
+    "grov-arithmetic-operator": {
+      "match": "[+\\-*/%]",
+      "name": "keyword.operator.arithmetic.grov"
+    },
+
+    "grov-assignment-operator": {
+      "match": "(?<![=!<>])=(?!=)",
+      "name": "punctuation.separator.key-value.grov"
+    },
+
+    "grov-accessor": {
+      "match": "\\.",
+      "name": "punctuation.accessor.grov"
+    },
+
+    "grov-variable": {
+      "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+      "name": "entity.other.attribute-name.grov"
+    }
+  }
+}

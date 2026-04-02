@@ -1,7 +1,7 @@
 /// <reference types="tree-sitter-cli/dsl" />
 
 module.exports = grammar({
-  name: "wispy",
+  name: "grov",
 
   extras: ($) => [/\s/],
 

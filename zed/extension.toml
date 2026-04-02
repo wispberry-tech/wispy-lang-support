@@ -1,19 +1,19 @@
 [extension]
-id = "wispy"
-name = "Wispy Templates"
-description = "Syntax highlighting for Wispy HTML templates"
+id = "grov"
+name = "Wispy Grove"
+description = "Syntax highlighting for Wispy Grove templates"
 version = "0.1.0"
 schema_version = 1
 authors = ["Wispy Contributors"]
-repository = "https://github.com/wispy-lang/wispy-lang-support"
+repository = "https://github.com/wispy-lang/wispy-grove-support"
 
-[grammars.wispy]
-repository = "https://github.com/wispy-lang/tree-sitter-wispy"
+[grammars.grov]
+repository = "https://github.com/wispy-lang/tree-sitter-grov"
 rev = "main"
 
-[language.wispy]
-scope = "source.wispy"
-file_types = ["wsp"]
+[language.grov]
+scope = "source.grov"
+file_types = ["grov"]
 line_comments = []
 block_comment = ["{#", "#}"]
 brackets = [

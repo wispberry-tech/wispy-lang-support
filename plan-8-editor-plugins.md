@@ -1,8 +1,8 @@
-# Plan 8: Editor Plugin Support for Wispy Templates
+# Plan 8: Editor Plugin Support for Wispy Grove
 
 ## Motivation
 
-Without editor support, developers writing Wispy templates get no syntax highlighting — the `{{ }}`, `{% %}`, and `{# #}` delimiters render as plain text inside HTML files. This makes templates harder to read and write. A dedicated language grammar gives developers keyword highlighting, delimiter coloring, and proper scope recognition across VS Code (immediate), Neovim, and Zed (future).
+Without editor support, developers writing Wispy Grove templates get no syntax highlighting — the `{{ }}`, `{% %}`, and `{# #}` delimiters render as plain text inside HTML files. This makes templates harder to read and write. A dedicated language grammar gives developers keyword highlighting, delimiter coloring, and proper scope recognition across VS Code (immediate), Neovim, and Zed (future).
 
 ---
 
@@ -23,12 +23,12 @@ Phase 1 ships a VS Code extension using TextMate grammars (regex-based, quick to
 ## Repository Layout
 
 ```
-wispy-editor/
+wispy-grove-editor/
 ├── vscode/
 │   ├── package.json
 │   ├── language-configuration.json
 │   └── syntaxes/
-│       └── wispy.tmLanguage.json
+│       └── grove.tmLanguage.json
 ├── tree-sitter/                  # Phase 2
 │   ├── grammar.js
 │   ├── src/
@@ -46,69 +46,69 @@ wispy-editor/
 
 ### File Association
 
-- Language ID: `wispy`
-- File extensions: `.wsp`
+- Language ID: `grov`
+- File extensions: `.grov`
 - Base language: HTML (`text.html.basic`)
 
 ### Scope Name
 
-`text.html.wispy` — extends the built-in HTML grammar via injection.
+`text.html.grov` — extends the built-in HTML grammar via injection.
 
 ### Grammar Structure
 
-The TextMate grammar uses **injections** to layer Wispy syntax on top of `text.html.basic`. This means all standard HTML highlighting works unchanged, and Wispy constructs are highlighted on top.
+The TextMate grammar uses **injections** to layer Grove syntax on top of `text.html.basic`. This means all standard HTML highlighting works unchanged, and Grove constructs are highlighted on top.
 
 #### Delimiter Scopes
 
 | Syntax | TextMate Scope | Description |
 |--------|---------------|-------------|
-| `{{` / `}}` | `punctuation.section.embedded.begin/end.wispy` | Output delimiters |
-| `{%` / `%}` | `punctuation.section.tag.begin/end.wispy` | Tag delimiters |
-| `{#` / `#}` | `punctuation.definition.comment.begin/end.wispy` | Comment delimiters |
-| `-` (in `{{-`, `-%}`, etc.) | `keyword.operator.whitespace.wispy` | Whitespace strip marker |
+| `{{` / `}}` | `punctuation.section.embedded.begin/end.grov` | Output delimiters |
+| `{%` / `%}` | `punctuation.section.tag.begin/end.grov` | Tag delimiters |
+| `{#` / `#}` | `punctuation.definition.comment.begin/end.grov` | Comment delimiters |
+| `-` (in `{{-`, `-%}`, etc.) | `keyword.operator.whitespace.grov` | Whitespace strip marker |
 
 #### Keyword Scopes
 
 | Keywords | TextMate Scope |
 |----------|---------------|
-| `if`, `elif`, `else`, `endif`, `unless`, `endunless` | `keyword.control.conditional.wispy` |
-| `for`, `in`, `empty`, `endfor` | `keyword.control.loop.wispy` |
-| `set`, `with`, `endwith`, `capture`, `endcapture` | `keyword.control.assignment.wispy` |
-| `macro`, `endmacro`, `call`, `endcall` | `keyword.control.macro.wispy` |
-| `extends`, `block`, `endblock`, `include`, `render`, `import`, `as` | `keyword.control.composition.wispy` |
-| `component`, `endcomponent`, `props`, `slot`, `endslot`, `fill`, `endfill` | `keyword.control.component.wispy` |
-| `asset`, `endasset`, `meta`, `hoist`, `endhoist` | `keyword.control.web.wispy` |
-| `raw`, `endraw` | `keyword.control.raw.wispy` |
-| `isolated` | `keyword.other.modifier.wispy` |
-| `and`, `or`, `not` | `keyword.operator.logical.wispy` |
-| `true`, `false` | `constant.language.boolean.wispy` |
-| `nil`, `null` | `constant.language.null.wispy` |
+| `if`, `elif`, `else`, `endif`, `unless`, `endunless` | `keyword.control.conditional.grov` |
+| `for`, `in`, `empty`, `endfor` | `keyword.control.loop.grov` |
+| `set`, `with`, `endwith`, `capture`, `endcapture` | `keyword.control.assignment.grov` |
+| `macro`, `endmacro`, `call`, `endcall` | `keyword.control.macro.grov` |
+| `extends`, `block`, `endblock`, `include`, `render`, `import`, `as` | `keyword.control.composition.grov` |
+| `component`, `endcomponent`, `props`, `slot`, `endslot`, `fill`, `endfill` | `keyword.control.component.grov` |
+| `asset`, `endasset`, `meta`, `hoist`, `endhoist` | `keyword.control.web.grov` |
+| `raw`, `endraw` | `keyword.control.raw.grov` |
+| `isolated` | `keyword.other.modifier.grov` |
+| `and`, `or`, `not` | `keyword.operator.logical.grov` |
+| `true`, `false` | `constant.language.boolean.grov` |
+| `nil`, `null` | `constant.language.null.grov` |
 
 #### Expression Scopes
 
 | Syntax | TextMate Scope |
 |--------|---------------|
-| `"string"`, `'string'` | `string.quoted.double/single.wispy` |
-| `123`, `1.23` | `constant.numeric.wispy` |
-| `\|` (pipe) | `keyword.operator.filter.wispy` |
-| Filter name (after `\|`) | `support.function.filter.wispy` |
-| `~` | `keyword.operator.concatenation.wispy` |
-| `+`, `-`, `*`, `/`, `%` | `keyword.operator.arithmetic.wispy` |
-| `==`, `!=`, `<`, `<=`, `>`, `>=` | `keyword.operator.comparison.wispy` |
-| `=` (in named args) | `keyword.operator.assignment.wispy` |
-| `.` (attribute access) | `punctuation.accessor.wispy` |
-| Identifiers | `variable.other.wispy` |
-| Function calls (`range()`, `caller()`, `super()`) | `support.function.builtin.wispy` |
+| `"string"`, `'string'` | `string.quoted.double/single.grov` |
+| `123`, `1.23` | `constant.numeric.grov` |
+| `\|` (pipe) | `keyword.operator.filter.grov` |
+| Filter name (after `\|`) | `support.function.filter.grov` |
+| `~` | `keyword.operator.concatenation.grov` |
+| `+`, `-`, `*`, `/`, `%` | `keyword.operator.arithmetic.grov` |
+| `==`, `!=`, `<`, `<=`, `>`, `>=` | `keyword.operator.comparison.grov` |
+| `=` (in named args) | `keyword.operator.assignment.grov` |
+| `.` (attribute access) | `punctuation.accessor.grov` |
+| Identifiers | `variable.other.grov` |
+| Function calls (`range()`, `caller()`, `super()`) | `support.function.builtin.grov` |
 
 #### Comment Scopes
 
 | Syntax | TextMate Scope |
 |--------|---------------|
-| `{# ... #}` (entire block) | `comment.block.wispy` |
+| `{# ... #}` (entire block) | `comment.block.grov` |
 
 #### Raw Block
 
-Inside `{% raw %} ... {% endraw %}`, everything is treated as plain text — no Wispy patterns match. The raw/endraw tags themselves are highlighted as keywords.
+Inside `{% raw %} ... {% endraw %}`, everything is treated as plain text — no Grove patterns match. The raw/endraw tags themselves are highlighted as keywords.
 
 ### Language Configuration (`language-configuration.json`)
 
@@ -151,21 +151,21 @@ Key fields:
 
 ```json
 {
-  "name": "wispy-templates",
-  "displayName": "Wispy Templates",
-  "description": "Syntax highlighting for Wispy HTML templates",
+  "name": "wispy-grove",
+  "displayName": "Wispy Grove",
+  "description": "Syntax highlighting for Wispy Grove templates",
   "categories": ["Programming Languages"],
   "contributes": {
     "languages": [{
-      "id": "wispy",
-      "aliases": ["Wispy", "Wispy Template"],
-      "extensions": [".wsp"],
+      "id": "grov",
+      "aliases": ["Wispy Grove", "Grove Template"],
+      "extensions": [".grov"],
       "configuration": "./language-configuration.json"
     }],
     "grammars": [{
-      "language": "wispy",
-      "scopeName": "text.html.wispy",
-      "path": "./syntaxes/wispy.tmLanguage.json",
+      "language": "grov",
+      "scopeName": "text.html.grov",
+      "path": "./syntaxes/grove.tmLanguage.json",
       "embeddedLanguages": {
         "text.html.basic": "html"
       }
@@ -176,7 +176,7 @@ Key fields:
 
 ### Built-in Filter Recognition
 
-The following filter names should be recognized after `|` and highlighted as `support.function.filter.wispy`:
+The following filter names should be recognized after `|` and highlighted as `support.function.filter.grov`:
 
 **String:** `upcase`, `downcase`, `capitalize`, `titlecase`, `trim`, `lstrip`, `rstrip`, `replace`, `replace_all`, `prepend`, `append`, `truncate`, `truncate_words`, `split`, `strip_html`, `strip_newlines`, `newline_to_br`, `nl2br`, `escape`, `h`, `url_encode`, `url_decode`, `base64_encode`, `base64_decode`, `slugify`, `markdown`, `safe`, `json`, `default`
 
@@ -190,10 +190,10 @@ The following filter names should be recognized after `|` and highlighted as `su
 
 ### Grammar Design
 
-The Tree-sitter grammar (`grammar.js`) should parse Wispy as an **embedded language** on top of HTML. The recommended approach:
+The Tree-sitter grammar (`grammar.js`) should parse Grove as an **embedded language** on top of HTML. The recommended approach:
 
 1. Use `tree-sitter-html` as the base parser via `externals` or injection.
-2. Define Wispy-specific nodes for:
+2. Define Grove-specific nodes for:
    - `output_statement` — `{{ expr }}`
    - `tag_statement` — `{% tag ... %}`
    - `comment` — `{# ... #}`
@@ -247,7 +247,7 @@ The Tree-sitter grammar (`grammar.js`) should parse Wispy as an **embedded langu
 ### Neovim Integration
 
 - Register the parser with `nvim-treesitter` via a custom parser config.
-- Drop `highlights.scm` into `queries/wispy/highlights.scm`.
+- Drop `highlights.scm` into `queries/grov/highlights.scm`.
 - Add `injections.scm` to delegate HTML regions to `tree-sitter-html`.
 
 ### Zed Integration
@@ -276,23 +276,23 @@ These cases need explicit handling in both grammars:
 ## Acceptance Criteria
 
 ### Phase 1 (VS Code)
-- [ ] `.wsp` files auto-detect as Wispy language
-- [ ] HTML syntax highlighting works unchanged inside Wispy files
+- [ ] `.grov` files auto-detect as Grove language
+- [ ] HTML syntax highlighting works unchanged inside Grove files
 - [ ] All three delimiter pairs (`{{ }}`, `{% %}`, `{# #}`) are distinctly colored
 - [ ] Keywords inside `{% %}` tags are highlighted
 - [ ] Expressions inside `{{ }}` are highlighted (strings, numbers, operators, identifiers)
 - [ ] Filter names after `|` are highlighted as built-in functions
 - [ ] Comments (`{# #}`) are dimmed/grayed as comments
-- [ ] `{% raw %}` blocks suppress all Wispy highlighting
+- [ ] `{% raw %}` blocks suppress all Grove highlighting
 - [ ] Whitespace strip markers (`-`) are highlighted
 - [ ] Auto-closing pairs work for all delimiter types
 - [ ] Block comment toggle uses `{# #}`
 
 ### Phase 2 (Tree-sitter)
-- [ ] Tree-sitter grammar parses all Wispy constructs into named AST nodes
+- [ ] Tree-sitter grammar parses all Grove constructs into named AST nodes
 - [ ] `highlights.scm` provides semantic highlighting for all token types
-- [ ] Neovim highlights Wispy files correctly via nvim-treesitter
-- [ ] Zed highlights Wispy files correctly via extension
+- [ ] Neovim highlights Grove files correctly via nvim-treesitter
+- [ ] Zed highlights Grove files correctly via extension
 - [ ] HTML injection works (HTML regions are parsed by tree-sitter-html)
 
 ---

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Multi-editor language support for Wispy Templates (`.wsp` files). The project provides syntax highlighting and editor integration across VS Code (Phase 1, implemented), Neovim, and Zed (Phase 2, stubs).
+Multi-editor language support for Wispy Grove (`.grov` files). The project provides syntax highlighting and editor integration across VS Code (Phase 1, implemented), Neovim, and Zed (Phase 2, stubs).
 
 ## Build Commands
 
@@ -12,7 +12,7 @@ Multi-editor language support for Wispy Templates (`.wsp` files). The project pr
 ```bash
 cd vscode && npm install
 # Package into .vsix:
-npx @vscode/vsce package --out wispy-templates.vsix --no-update-package-json
+npx @vscode/vsce package --out wispy-grove.vsix --no-update-package-json
 # Or use the build script:
 ./scripts/build-vscode.sh
 ```
@@ -30,7 +30,7 @@ No test infrastructure exists yet for either component.
 
 ## Architecture
 
-- **`vscode/`** — Self-contained VS Code extension using a **TextMate regex grammar** (`syntaxes/wispy.tmLanguage.json`). Scope name: `text.html.wispy`, extends `text.html.basic`.
+- **`vscode/`** — Self-contained VS Code extension using a **TextMate regex grammar** (`syntaxes/grove.tmLanguage.json`). Scope name: `text.html.grov`, extends `text.html.basic`.
 - **`tree-sitter/`** — **Tree-sitter AST grammar** (`grammar.js`) + highlight queries (`queries/highlights.scm`). Shared foundation for Neovim and Zed. Independent of the VS Code extension.
 - **`neovim/`** and **`zed/`** — Stub configurations that will consume the tree-sitter grammar.
 - **`scripts/`** — Bash build scripts for packaging each component.
@@ -41,9 +41,9 @@ The two grammars (TextMate and Tree-sitter) define the same language in parallel
 ## Key Design Decisions
 
 ### TextMate scope alignment with HTML
-The VS Code TextMate grammar (`wispy.tmLanguage.json`) must use scopes that match the built-in HTML grammar so that themes color Wispy tokens consistently with surrounding HTML. The mapping:
+The VS Code TextMate grammar (`grove.tmLanguage.json`) must use scopes that match the built-in HTML grammar so that themes color Grove tokens consistently with surrounding HTML. The mapping:
 
-| Wispy token | Scope (must match HTML equivalent) |
+| Grove token | Scope (must match HTML equivalent) |
 |---|---|
 | `{%` `%}` `{{` `}}` delimiters | `punctuation.definition.tag.begin/end` (like `<` `>`) |
 | Tag keywords (`if`, `for`, `block`, etc.) | `entity.name.tag` (like `div`, `span`) |
