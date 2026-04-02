@@ -11,7 +11,7 @@ echo "Installing dependencies..."
 npm install
 
 # Package the extension into a .vsix
-echo "Packaging Wispy VS Code extension..."
-npx @vscode/vsce package --out "$VSCODE_DIR/wispy-templates.vsix" --no-update-package-json
+echo "Packaging wispy-grove-lang-support VS Code extension..."
+npx @vscode/vsce package --out "$VSCODE_DIR/wispy-grove-lang-support.vsix" --no-update-package-json
 
-echo "Done: $VSCODE_DIR/wispy-templates.vsix"
+echo "Done: $VSCODE_DIR/wispy-grove-lang-support.vsix"
