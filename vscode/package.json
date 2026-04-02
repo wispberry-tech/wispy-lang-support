@@ -30,7 +30,10 @@
         "extensions": [
           ".grov"
         ],
-        "icon": "images/icon.png",
+        "icon": {
+          "light": "./images/icon.png",
+          "dark": "./images/icon.png"
+        },
         "configuration": "./language-configuration.json"
       }
     ],
